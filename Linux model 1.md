@@ -1,9 +1,8 @@
 # Linux Model 1 — Homework Report
 
-Course: Linux (Johanna Heinonen)
+Course: Linux 
 
-Student: [Your name]
-Date: [YYYY-MM-DD]
+Student: Ismail Isse
 
 ## 1. Objectives
 - Get familiar with the Linux command line and basic shell utilities.
