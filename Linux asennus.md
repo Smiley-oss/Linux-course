@@ -90,7 +90,24 @@ Lisenssit määrittelevät, miten avoin koodia saa käyttää. Osa lisensseistä
 Lähdekoodin vaikutus nykyaikaiseen teknologiaan on valtava. Internetin palvelimet, pilvipalvelut, mobiilialustat ja kehitystyökalut rakentuvat pitkälti avoimen koodin päälle. Ilman sitä digitaalinen infrastruktuuri olisi kalliimpi, suljetumpi ja hitaammin kehittyvä. Avoin lähdekoodi myös vähentää riippuvuutta yksittäisistä yrityksistä, koska kuka tahansa voi jatkaa ohjelmiston kehittämistä.
 
 ### Haasteet ja riskit
+
 Vaikka avoin lähdekoodi tuo mukanaan myös haasteita, kuten mahdollisia haavoittuvuuksia ja sen, ettei kukaan tarjoa virallista vastuuta, sen hyödyt ovat paljon suuremmat. Se mahdollistaa nopeaa innovoinnin, laaja yhteistyön ja sen teknologia on kaikkien saatavilla, ei vain suureten yritysten.
 
 ### Oma näkökulma
 Minun näkökulmasta avoin lähdekoodi on yksi parhaista tavoista oppia IT-alaa. Kun osallistuu projekteihin, korjaa bugeja tai tekee pieniä parannuksia, oppia oikeita taitoja ja sen kokemusta, joka näkyy myös työnantajille.
+
+## 4 Yhteenveto
+Moduulin tavoitteet saavutettiin. Asensin Linux onnistuneesti, loin GitHub-repositorion ja kirjoitin tiivistelmän avoimen lähdekoodin merkityksestä, Opin käytännössä, miten Linux toimii ja miksi avoin lähdekoodi on kriittinen osa modernia digitaalista infrastruktuuria.
+
+## 5 Lähteet
+Debian Project. (2026). Debian Documentation. Debian.
+https://www.debian.org/doc/
+
+Oracle Corporation. (2026). Oracle VM VirtualBox User Guide, Release 7.2. VirtualBox.org
+https://www.virtualbox.org/manual/
+
+Coursera. (2026). What is Open Source Software and Why Use OSS? Coursera Articles.
+https://www.coursera.org/articles/what-is-open-source-software
+
+GitHub, Inc. (2026). GitHub - Software Development Platform.
+https://github.com
