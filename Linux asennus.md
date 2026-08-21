@@ -5,7 +5,7 @@ Moduulin tavoitteena oli asentaa Linux‑käyttöjärjestelmä omalle koneelle j
 Halusin oppia käytännössä, miten Linux asennetaan, miten virtuaalikone toimii, miten GitHub‑repo luodaan ja miksi avoin lähdekoodi on niin keskeinen osa modernia IT‑maailmaa.
 
 ## 1 GitHub‑repositorion luominen
-# Tavoite
+### Tavoite
 Luoda oma GitHub‑repo, johon kurssin raportit tallennetaan Markdown‑muodossa.
 
 ### Vaiheet
@@ -68,14 +68,25 @@ Ratkaisu: käytin kurssin workaround‑ohjetta ja asensin lisäosat manuaalisest
 - Näytön resoluutio oli aluksi pieni:  
 Ratkaisu: VirtualBox → Display → Scale → 125%.
 
-Kuvakaappaukset (lisää omat GitHubiin/PDF:ään)
-VirtualBox VM‑asetukset
+VirtualBox VM‑asetukset:
 
-Debianin asennusvaiheet
+<img width="839" height="458" alt="Vm asennus" src="https://github.com/user-attachments/assets/23389dfe-650d-4147-aae9-1805bcc16292" />
 
-Ensimmäinen käynnistys
 
-Päivityskomennot terminaalissa
+Debianin asennusvaihe:
+
+<img width="1236" height="874" alt="Debian asennus" src="https://github.com/user-attachments/assets/1f2eb740-4825-4979-9f13-92210ddd321f" />
+
+
+Ensimmäinen käynnistys:
+
+<img width="1907" height="1061" alt="vm käynnystys" src="https://github.com/user-attachments/assets/3ac7e0a6-3408-4fba-9779-ec61078f2830" />
+
+
+Päivityskomennot terminaalissa:
+
+<img width="1247" height="683" alt="kommento rivi" src="https://github.com/user-attachments/assets/7d163cfe-b64a-4226-adf2-f397bafc9a2c" />
+
 
 # 3 Mitä avoin lähdekoodi tarkoitta
 Avoimen lähdekoodin ohjelmistot ovat ohjelmia, joiden sisäinen toiminta on kaikkien nähtävissä ja muokattavissa. Tämä avoimuus on tehnyt yhden modernin teknologian tärkeimmistä peruspilareista. Suurin osa yritysten käyttämistä ohjelmistoista sisältää jonkin verran avointa koodia, mikä osoittaa, että avoin lähdekoodi on vakiintunut osa digitaalista ekosysteemiä.
