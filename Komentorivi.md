@@ -55,4 +55,12 @@ https://github.com/johannaheinonen/johanna-test-repo/blob/main/module_2md
 Aristocratos (2006). btop - Modern resource monitor for Linux.
 https://github.com/aristocratos/btop
 
+<img width="1637" height="797" alt="Näyttökuva 2026-08-29 002216" src="https://github.com/user-attachments/assets/50eeb12a-ff0c-424f-8d64-03c0f84603a7" />
+<img width="840" height="742" alt="Näyttökuva 2026-08-29 002104" src="https://github.com/user-attachments/assets/0717e8f2-d33e-48b9-903c-8699195515da" />
+<img width="1756" height="775" alt="Näyttökuva 2026-08-29 002655" src="https://github.com/user-attachments/assets/9a5d2746-c27a-44f7-832f-4b82a8b8fc87" />
+<img width="1681" height="793" alt="Näyttökuva 2026-08-29 002607" src="https://github.com/user-attachments/assets/a1717924-500a-4372-822d-a42a0f462119" />
+<img width="1187" height="905" alt="Näyttökuva 2026-08-29 002425" src="https://github.com/user-attachments/assets/b8a96c8f-aec6-4a29-9a81-1af053cb5416" />
+<img width="1111" height="907" alt="Näyttökuva 2026-08-29 002331" src="https://github.com/user-attachments/assets/90d04bed-460a-4f37-8ed4-a00c97dd6ac0" />
+<img width="950" height="857" alt="Näyttökuva 2026-08-29 002248" src="https://github.com/user-attachments/assets/b449c41d-5049-409b-be00-838115b7cb7b" />
+
 
