@@ -1,6 +1,6 @@
 # 1 Johdanto
-Tässä harjoituksessa mun tavoitteena oli laittaa pystyyn Apache2-web-palvelin Ubuntu-ympäristössä ja opetella hallitsemaan useampaa eri sivustoa samalla koneella nimitpohjaisten virtuaalipalvelinten (Name-based Virtual Host) avulla. Ajatuksena oli saada samasta IP-osoitteesta ja portista 80 auki eri sivustot eli localhost, site1.com ja site2.com.
-Toinen tärkeä juttu tässä tehtävässä oli oppia pyörittämään nettisivujen tiedostoja suoraan omasta kotihakemistosta tavallisena käyttäjänä, jotta ei tarvitsisi joka välissä säätää pääkäyttäjän sudo-oikeuksilla. Lisäksi testailtiin palomuurin vaikutusta lokaaliliikenteeseen, seurattiin järjestelmän lokitiedostoja ja ratkottiin vastaan tulleita konfiguraatio- ja kirjoitusvirheitä.
+Tässä harjoituksessa mun tavoitteena oli laittaa pystyyn Apache2-web-palvelin Ubuntu-ympäristössä ja opetella hallitsemaan useampaa eri sivustoa samalla koneella nimipohjaisten virtuaalipalvelinten (Name-based Virtual Host) avulla. Ajatuksena oli saada samasta IP-osoitteesta ja portista 80 auki eri sivustot eli localhost, site1.com ja site2.com.
+Toinen tärkeä juttu tässä tehtävässä oli oppia pyörittämään nettisivujen tiedostoja suoraan omasta kotihakemistosta tavallisena käyttäjänä, jotta ei tarvitsisi joka välissä säätää pääkäyttäjän sudo-oikeuksilla. Lisäksi testailin palomuurin vaikutusta lokaaliliikenteeseen, seurasin järjestelmän lokitiedostoja ja ratkosin vastaan tulleita konfiguraatio- ja kirjoitusvirheitä.
 
 # 2 Apachen asennus ja oletussivun muokkaus
 Aloitin tehtävän asentamalla Apache2-palvelimen järjestelmään pakettienhallinnan kautta. Kun asennus oli valmis, testasin palvelimen toimintaa avaamalla osoitteen localhost sekä graafisella verkkoselaimella että suoraan päätteestä curl-komennolla. Mulla aukesi ruudulle Apachen normaali Ubuntu-oletussivu, mikä varmisti sen, että palvelinpyörähti kerralla käyntiin.
@@ -10,7 +10,7 @@ Seuraavaksi oli tarkoitus muokata tätä oletussivua ja korvata se omalla teksti
 
 
 ### Teoriakysymysten pohdintaa ja vastauksia:
-####Mitä komennossa tapahtuu vaihe vaiheelta?
+#### Mitä komennossa tapahtuu vaihe vaiheelta?
 Ensin echo-komento tulostaa halutun tekstin puskuriin. Sen jälkeen pystyviiva eli putki (pipe) ottaa tämän tulosteen ja syöttää sen suoraan tee-komennolle. Koska tee-komennon edessä käytettiin sudoa, itse tiedostoon kirjoittaminen tapahtuu pääkäyttäjän oikeuksilla. Tämä on tarpeen, koska tavallisella käyttäjällä ei ole kirjoitusoikeutta /var/www/html/-hakemistoon.
 #### Mitä muita tapoja olisi saavuttaa sama lopputulos?
 Saman asian olisi voinut hoitaa avaamalla kyseisen tiedoston suoraan teksti-editorilla (kuten Nanolla) suoritettuna sudo- komennolla, tai avaamalla pääkäyttäjän subshellin bash-komennolla ja tekemällä tavallisen tulostuksen uudelleenohjauksen suoraan tiedostoon.
@@ -25,9 +25,9 @@ Seuraavaksi asensin ja kytkin päälle UFW-palomuurin tutkiakseni, miten se vaik
 
 Tästä testistä huomasin sen, että jos UFW-palomuuriin tekee yleisen estosäännön portille 80 ilman tarkempia rajauksia, se blokkaa myös koneen sisäisen loopback-liikenteen. Eli vaikka yhteys ei tule verkosta vaan koneelta itseltään osoitteeseen 127.0.0.1, palomuuri ottaa siihen kiinni ja estää sivun latautumisen. Testin jälkeen avasin portin 80 uudelleen palomuurista, jotta pääsin jatkamaan harjoitusta.
 # 4 Ensimmäinen virtuaalipalvelin (site1.com) kotihakemistosta
-Tehtävän ajatuksena oli kokeilla sivujen ajamista kotihakemistosta käsin. Luoin omalle käyttäjälleni oman hakemiston public_html/site1.com ja tein sinne yksinkertaisen index.html-tiedoston.
+Tehtävän ajatuksena oli kokeilla sivujen ajamista kotihakemistosta käsin. Luoin omalle käyttäjälleni oman hakemiston /home/ismaili/site1.com ja tein sinne yksinkertaisen index.html-tiedoston.
 Tässä kohtaa piti olla tarkkana kansioiden oikeuksien kanssa: Apachen taustaprosessi eli www-data-käyttäjä tarvitsee lukualueen koko polulle kotihakemistoon asti. Asetin kotihakemistolle ja luomilleni kansioille lukuoikeudet kuntoon.
-Sen jälkeen siirryin tekemään Apachen virtuaalipalvelimen konfiguraatiota. Luoin uuden tiedoston site1.com.conf Apachen sites-available -hakemistoon. Määritin sinne ServerName-arvoksi site1.com ja DocumentRoot-poluksi oman kotihakemistoni kansion. Lisäksi piti lisätä Directory-osio, jossa annettiin Apachelle lupa lukea kyseistä kotihakemiston kansiota (Require all granted).
+Sen jälkeen siirryin tekemään Apachen virtuaalipalvelimen konfiguraatiota. Luoin uuden tiedoston site1.com.conf Apachen sites-available -hakemistoon. Määritin sinne ServerName-arvoksi site1.com ja DocumentRoot-poluksi oman kotihakemistoni kansioon. Lisäksi piti lisätä Directory-osio, jossa annettiin Apachelle lupa lukea kyseistä kotihakemiston kansiota (Require all granted).
 Otin uuden sivuston käyttöön a2ensite-komennolla ja latasin Apachen asetukset uudelleen.
 
 <img width="957" height="1017" alt="kuva3 Apache" src="https://github.com/user-attachments/assets/ba71cdef-5600-4c6f-92a8-5df286de3325" />
