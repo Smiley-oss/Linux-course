@@ -51,11 +51,11 @@ Tämä johtui siitä, että Apache tarjoaa aina oletuksena aakkosjärjestyksess�
 
 Muokkasin Apachen oletuskonfiguraatiota ja varmistin, että jokaisella sivustolla (site1.com, site2.com sekä localhost) on omat selkeät konfiguraatiotiedostot ja jokaisessa on määritelty oikea ServerName-rivi.
 
-Apachen AH00558 FQDN-varoitus:
+#### Apachen AH00558 FQDN-varoitus:
 
 Kun ajoin Apachen konfiguraatiotestin (apache2ctl configtest), ruudulle tuli keltainen varoitus siitä, ettei palvelimen globaalia ServerName-nimeä ole asetettu. Vaikka syntaksi oli muuten kunnossa, korjasin tämän tekemällä uuden servername.conf-tiedoston Apachen conf-available-hakemistoon ja kytkemällä sen a2enconf-komennolla päälle. Tämän jälkeen configtest antoi pelkkää puhdasta "Syntax OK" -ilmoitusta.
 
-Kirjoitusvirhe Nanolla polkua avattaessa:
+#### Kirjoitusvirhe Nanolla polkua avattaessa:
 
 Eräässä vaiheessa Nano-editori valitti ruudun alalaidassa punaisella, että hakemistoa ei ole olemassa. Huomasin komennostani, että olin kirjoittanut kansion nimen väärin (apaeche2 ja site-available). Poistuin Nanolta ja kirjoitin komennon uudelleen oikealla polulla /etc/apache2/sites-available/.
 
@@ -67,14 +67,13 @@ Kun kaikki korjaukset oli tehty ja Apache ladattu uudelleen, testasin kaikki kol
 # 7 Keskeiset havainnot ja pohdinta
 Mitä opin teknisesti?
 
-Opimpa kunnolla sen, miten nimitpohjainen virtuaalipalvelin toimii käytännössä. Ymmärsin, että vaikka kaikki pyynnöt tulevat samaan IP-osoitteeseen (127.0.0.1) ja samaan porttiin 80, Apache osaa lukea selaimen/curlin lähettämästä HTTP Host -otsakkeesta, mitä sivustoa käyttäjä hakee ja tarjoaa sen perusteella oikean kansion sisällön.
+Opimpa kunnolla sen, miten nimipohjainen virtuaalipalvelin toimii käytännössä. Ymmärsin, että vaikka kaikki pyynnöt tulevat samaan IP-osoitteeseen (127.0.0.1) ja samaan porttiin 80, Apache osaa lukea selaimen/curlin lähettämästä HTTP Host -otsakkeesta, mitä sivustoa käyttäjä hakee ja tarjoaa sen perusteella oikean kansion sisällön.
 
-Mikä oli haastavaa ja mikä helppoa?
-
+#### Mikä oli haastavaa ja mikä helppoa?
 Haastavinta oli hahmottaa aluksi se, miksi localhost näytti site1.com-sivua ja miten Apache valitsee oletussivuston silloin kun täsmäävää nimeä ei löydy. Myös hakemistojen oikeuksien säätäminen kotihakemistosta käsin vaati huolellisuutta. Helppoa taas oli itse konfiguraatiotiedostojen kirjoittaminen ja sivustojen kytkeminen päälle Apachen omilla a2en-työkaluilla.
-### Miten osaaminen kehittyi?
+#### Miten osaaminen kehittyi?
 Terminaalissa työskentely ja virheiden vianmääritys paranivat selvästi. Tuli todella tutuksi lukematon määrä Apachen hallintakomentoja, ja oppi siihen ettei panikoi virheilmoituksista, vaan lukee ne lokista tai ruudulta ja korjaa polut tai asetukset niiden mukaan.
-#8 Yhteenveto
+# 8 Yhteenveto
 Tehtävälle asetetut tavoitteet saavutettiin täydellisesti. Apache2-palvelin saatiin pyörimään ongelmattomasti, palomuuriasetusten vaikutus todettiin käytännössä ja järjestelmään saatiin määriteltyä kaksi eri kotihakemistosta pyörivää virtuaalipalvelinta (site1.com ja site2.com) sekä erillinen localhost. Kaikki matkan varrella tulleet konfiguraatio- ja syntaksivirheet saatiin korjattua, ja lopputulos testattiin toimivaksi.
 # Lähteet
 The Apache Software Foundation. Apache HTTP Server Documentation Version 2.4: Apache Name-Based Virtual Host Support. Saatavilla: https://httpd.apache.org/docs/2.4/vhosts/name-based.html
