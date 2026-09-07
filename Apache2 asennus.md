@@ -1,4 +1,4 @@
-#1 Johdanto
+# 1 Johdanto
 Tässä harjoituksessa mun tavoitteena oli laittaa pystyyn Apache2-web-palvelin Ubuntu-ympäristössä ja opetella hallitsemaan useampaa eri sivustoa samalla koneella nimitpohjaisten virtuaalipalvelinten (Name-based Virtual Host) avulla. Ajatuksena oli saada samasta IP-osoitteesta ja portista 80 auki eri sivustot eli localhost, site1.com ja site2.com.
 Toinen tärkeä juttu tässä tehtävässä oli oppia pyörittämään nettisivujen tiedostoja suoraan omasta kotihakemistosta tavallisena käyttäjänä, jotta ei tarvitsisi joka välissä säätää pääkäyttäjän sudo-oikeuksilla. Lisäksi testailtiin palomuurin vaikutusta lokaaliliikenteeseen, seurattiin järjestelmän lokitiedostoja ja ratkottiin vastaan tulleita konfiguraatio- ja kirjoitusvirheitä.
 
