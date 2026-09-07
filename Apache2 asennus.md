@@ -2,7 +2,7 @@
 Tässä harjoituksessa mun tavoitteena oli laittaa pystyyn Apache2-web-palvelin Ubuntu-ympäristössä ja opetella hallitsemaan useampaa eri sivustoa samalla koneella nimitpohjaisten virtuaalipalvelinten (Name-based Virtual Host) avulla. Ajatuksena oli saada samasta IP-osoitteesta ja portista 80 auki eri sivustot eli localhost, site1.com ja site2.com.
 Toinen tärkeä juttu tässä tehtävässä oli oppia pyörittämään nettisivujen tiedostoja suoraan omasta kotihakemistosta tavallisena käyttäjänä, jotta ei tarvitsisi joka välissä säätää pääkäyttäjän sudo-oikeuksilla. Lisäksi testailtiin palomuurin vaikutusta lokaaliliikenteeseen, seurattiin järjestelmän lokitiedostoja ja ratkottiin vastaan tulleita konfiguraatio- ja kirjoitusvirheitä.
 
-#2 Apachen asennus ja oletussivun muokkaus
+# 2 Apachen asennus ja oletussivun muokkaus
 Aloitin tehtävän asentamalla Apache2-palvelimen järjestelmään pakettienhallinnan kautta. Kun asennus oli valmis, testasin palvelimen toimintaa avaamalla osoitteen localhost sekä graafisella verkkoselaimella että suoraan päätteestä curl-komennolla. Mulla aukesi ruudulle Apachen normaali Ubuntu-oletussivu, mikä varmisti sen, että palvelinpyörähti kerralla käyntiin.
 Seuraavaksi oli tarkoitus muokata tätä oletussivua ja korvata se omalla tekstillä. Tein tämän syöttämällä echo-komennon ja ohjaamalla sen suoraan pääkäyttäjän oikeuksilla toimivalle tee-komennolle osoitteeseen /var/www/html/index.html. Tämä oli myös tehtävänannon mukaan ainoa kohta, jossa nettisivun muokkaamiseen tarvittiin sudo-oikeuksia.
 
@@ -15,14 +15,14 @@ Ensin echo-komento tulostaa halutun tekstin puskuriin. Sen jälkeen pystyviiva e
 Saman asian olisi voinut hoitaa avaamalla kyseisen tiedoston suoraan teksti-editorilla (kuten Nanolla) suoritettuna sudo- komennolla, tai avaamalla pääkäyttäjän subshellin bash-komennolla ja tekemällä tavallisen tulostuksen uudelleenohjauksen suoraan tiedostoon.
 #### Miksi tavallinen sudo echo -viritelmä uudelleenohjauksella ei toimi?
 Jos yrittää ajaa komennon muodossa "sudo echo teksti > tiedosto", komento epäonnistuu. Tämä johtuu siitä, että Linux-kuori tekee nimenomaan tuon nuoliputken eli uudelleenohjauksen nykyisen kirjautuneen käyttäjän oikeuksilla ennen kuin koko sudo-komento edes ehtii käynnistyä. Koska tavallisella käyttäjällä ei ole oikeutta kirjoittaa järjestelmähakemistoon, tulee ruudulle heti ilmoitus "Permission denied".
-#3 Nimenselvitys ja UFW-palomuurin testaus
+# 3 Nimenselvitys ja UFW-palomuurin testaus
 Sitä varten, että saisin site1.com ja site2.com osoitteet toimimaan omalla koneellani ilman oikeita rekisteröityjä verkkotunnuksia tai ulkoisia DNS-palvelimia, kävin muokkaamassa järjestelmän omaa /etc/hosts -tiedostoa. Lisäsin sinne rivit, jotka ohjaavat kyseiset verkkotunnukset suoraan oman koneen silmukkaosoitteeseen 127.0.0.1.
 Seuraavaksi asensin ja kytkin päälle UFW-palomuurin tutkiakseni, miten se vaikuttaa paikalliseen liikenteeseen. Suljin HTTP-liikenteen eli portin 80 palomuurista ja kokeilin ottaa yhteyttä localhostiin selaimella sekä curlilla.
 
 Kuva 2: UFW-palomuurin sääntöjen testaaminen ja yhteyden katkeaminen.
 
 Tästä testistä huomasin sen, että jos UFW-palomuuriin tekee yleisen estosäännön portille 80 ilman tarkempia rajauksia, se blokkaa myös koneen sisäisen loopback-liikenteen. Eli vaikka yhteys ei tule verkosta vaan koneelta itseltään osoitteeseen 127.0.0.1, palomuuri ottaa siihen kiinni ja estää sivun latautumisen. Testin jälkeen avasin portin 80 uudelleen palomuurista, jotta pääsin jatkamaan harjoitusta.
-#4 Ensimmäinen virtuaalipalvelin (site1.com) kotihakemistosta
+# 4 Ensimmäinen virtuaalipalvelin (site1.com) kotihakemistosta
 Tehtävän ajatuksena oli kokeilla sivujen ajamista kotihakemistosta käsin. Luoin omalle käyttäjälleni oman hakemiston public_html/site1.com ja tein sinne yksinkertaisen index.html-tiedoston.
 Tässä kohtaa piti olla tarkkana kansioiden oikeuksien kanssa: Apachen taustaprosessi eli www-data-käyttäjä tarvitsee lukualueen koko polulle kotihakemistoon asti. Asetin kotihakemistolle ja luomilleni kansioille lukuoikeudet kuntoon.
 Sen jälkeen siirryin tekemään Apachen virtuaalipalvelimen konfiguraatiota. Luoin uuden tiedoston site1.com.conf Apachen sites-available -hakemistoon. Määritin sinne ServerName-arvoksi site1.com ja DocumentRoot-poluksi oman kotihakemistoni kansion. Lisäksi piti lisätä Directory-osio, jossa annettiin Apachelle lupa lukea kyseistä kotihakemiston kansiota (Require all granted).
@@ -30,20 +30,20 @@ Otin uuden sivuston käyttöön a2ensite-komennolla ja latasin Apachen asetukset
 
 Kuva 3: Ensimmäisen virtuaalipalvelimen määrittäminen ja testaaminen
 
-#5 Lokitiedostot ja tahallinen virheen aiheuttaminen
+# 5 Lokitiedostot ja tahallinen virheen aiheuttaminen
 Päästäkseni näkemään miten Apache reagoi ongelmiin ja miltä se näyttää järjestelmässä, seurasin lokitiedostoja päätteessä tail- ja journalctl-komennoilla. Pidin auki sekä Apachen omaa error.log- ja access.log-tiedostoa että systemd:n journalctl-lokia.
 Tein kokeilumielessä konfiguraatioon tahallisen virheen: muutin site1.com-tiedostossa DocumentRoot-polun osoittamaan sellaiseen kansioon, jota ei ollut olemassa.
 
 Kuva 4: Virheilmoitusten ja lokimerkintöjen tarkastelu päätteessä.
 
 Kun tämän jälkeen yritin hakea sivua curlilla, selain/pääte ilmoitti virheestä. Virhelokissa (error.log) näkyi heti punaisella ja tarkalla aikaleimalla varustettu ilmoitus siitä, että Apache ei löytänyt pyydettyä hakemistoa tai tiedostoa. Tämä oli todella hyödyllinen testi, sillä se osoitti miten nopeasti oikean virheen syy löytyy suoraan lokia lukemalla ilman arvailemista. Korjasin polun takaisin oikeaksi ja latasin palvelimen uudelleen.
-#6 Haasteosuus: Toinen virtuaalipalvelin (site2.com) ja sekaannusten ratkaisu
+# 6 Haasteosuus: Toinen virtuaalipalvelin (site2.com) ja sekaannusten ratkaisu
 Haasteosuudessa tarkoituksena oli luoda toinen täysin erillinen virtuaalipalvelin eli site2.com toimimaan täysin samassa IP-osoitteessa. Luoin kotihakemistooni toisen kansion site2.com-sivustolle ja tein sinne oman index.html-tiedostoni eri sisällöllä.
 Luoin uuden konfiguraatiotiedoston site2.com.conf ja kytkin sen päälle. Tässä kohtaa törmäsin kuitenkin käytännön ongelmaan: kun tein pyynnön osoitteeseen localhost, se palauttikin minulle site1.com-sivuston sisällön! Sivustot menivät siis tavallaan päällekkäin.
 Tämä johtui siitä, että Apache tarjoaa aina oletuksena aakkosjärjestyksessä ensimmäisen löytämänsä virtuaalipalvelimen, jos pyydetylle osoitteelle (kuten localhost) ei ole määritelty omaa selkeää konfiguraatiota.
 
 Kuva 5: Ongelmatilanne, jossa localhost ja site1 menivät päällekkäin, sekä Nanolla sattunut kirjoitusvirhe.
-#6 Tämän vaiheen ongelmat ja niiden ratkaisut:
+# Tämän vaiheen ongelmat ja niiden ratkaisut:
 Sivustojen sekoittuminen:
 
 Muokkasin Apachen oletuskonfiguraatiota ja varmistin, että jokaisella sivustolla (site1.com, site2.com sekä localhost) on omat selkeät konfiguraatiotiedostot ja jokaisessa on määritelty oikea ServerName-rivi.
@@ -59,7 +59,7 @@ Eräässä vaiheessa Nano-editori valitti ruudun alalaidassa punaisella, että h
 Kun kaikki korjaukset oli tehty ja Apache ladattu uudelleen, testasin kaikki kolme osoitetta läpi curlin avulla.
 
 Kuva 6: Lopullinen varmistus päätteessä – kaikki kolme osoitetta toimivat erillään.
-#7 Keskeiset havainnot ja pohdinta
+# 7 Keskeiset havainnot ja pohdinta
 Mitä opin teknisesti?
 
 Opimpa kunnolla sen, miten nimitpohjainen virtuaalipalvelin toimii käytännössä. Ymmärsin, että vaikka kaikki pyynnöt tulevat samaan IP-osoitteeseen (127.0.0.1) ja samaan porttiin 80, Apache osaa lukea selaimen/curlin lähettämästä HTTP Host -otsakkeesta, mitä sivustoa käyttäjä hakee ja tarjoaa sen perusteella oikean kansion sisällön.
