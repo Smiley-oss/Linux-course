@@ -37,8 +37,8 @@ Otin uuden sivuston käyttöön a2ensite-komennolla ja latasin Apachen asetukset
 Päästäkseni näkemään miten Apache reagoi ongelmiin ja miltä se näyttää järjestelmässä, seurasin lokitiedostoja päätteessä tail- ja journalctl-komennoilla. Pidin auki sekä Apachen omaa error.log- ja access.log-tiedostoa että systemd:n journalctl-lokia.
 Tein kokeilumielessä konfiguraatioon tahallisen virheen: muutin site1.com-tiedostossa DocumentRoot-polun osoittamaan sellaiseen kansioon, jota ei ollut olemassa.
 
+<img width="1892" height="1000" alt="Näyttökuva 2026-09-07 224449" src="https://github.com/user-attachments/assets/1cc17680-a6ab-44c1-9871-ce433007e0ca" />
 
- 
 
 Kun tämän jälkeen yritin hakea sivua curlilla, selain/pääte ilmoitti virheestä. Virhelokissa (error.log) näkyi heti punaisella ja tarkalla aikaleimalla varustettu ilmoitus siitä, että Apache ei löytänyt pyydettyä hakemistoa tai tiedostoa. Tämä oli todella hyödyllinen testi, sillä se osoitti miten nopeasti oikean virheen syy löytyy suoraan lokia lukemalla ilman arvailemista. Korjasin polun takaisin oikeaksi ja latasin palvelimen uudelleen.
 # 6 Haasteosuus: Toinen virtuaalipalvelin (site2.com) ja sekaannusten ratkaisu
