@@ -67,13 +67,15 @@ Opimpa kunnolla sen, miten nimitpohjainen virtuaalipalvelin toimii käytännöss
 Mikä oli haastavaa ja mikä helppoa?
 
 Haastavinta oli hahmottaa aluksi se, miksi localhost näytti site1.com-sivua ja miten Apache valitsee oletussivuston silloin kun täsmäävää nimeä ei löydy. Myös hakemistojen oikeuksien säätäminen kotihakemistosta käsin vaati huolellisuutta. Helppoa taas oli itse konfiguraatiotiedostojen kirjoittaminen ja sivustojen kytkeminen päälle Apachen omilla a2en-työkaluilla.
-###Miten osaaminen kehittyi?
+### Miten osaaminen kehittyi?
 Terminaalissa työskentely ja virheiden vianmääritys paranivat selvästi. Tuli todella tutuksi lukematon määrä Apachen hallintakomentoja, ja oppi siihen ettei panikoi virheilmoituksista, vaan lukee ne lokista tai ruudulta ja korjaa polut tai asetukset niiden mukaan.
 #8 Yhteenveto
 Tehtävälle asetetut tavoitteet saavutettiin täydellisesti. Apache2-palvelin saatiin pyörimään ongelmattomasti, palomuuriasetusten vaikutus todettiin käytännössä ja järjestelmään saatiin määriteltyä kaksi eri kotihakemistosta pyörivää virtuaalipalvelinta (site1.com ja site2.com) sekä erillinen localhost. Kaikki matkan varrella tulleet konfiguraatio- ja syntaksivirheet saatiin korjattua, ja lopputulos testattiin toimivaksi.
 # Lähteet
 The Apache Software Foundation. Apache HTTP Server Documentation Version 2.4: Apache Name-Based Virtual Host Support. Saatavilla: https://httpd.apache.org/docs/2.4/vhosts/name-based.html
+
 The Apache Software Foundation. Apache HTTP Server Documentation Version 2.4: VirtualHost Examples. Saatavilla: https://httpd.apache.org/docs/2.4/vhosts/examples.html
+
 Canonical Ltd. / Ubuntu Documentation. Ubuntu Server Guide – Apache2 Web Server Configuration. Saatavilla: https://ubuntu.com/server/docs/web-servers-apache
 
 
