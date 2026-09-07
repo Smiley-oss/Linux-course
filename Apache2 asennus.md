@@ -1,12 +1,14 @@
 # 1 Johdanto
 Tässä harjoituksessa mun tavoitteena oli laittaa pystyyn Apache2-web-palvelin Ubuntu-ympäristössä ja opetella hallitsemaan useampaa eri sivustoa samalla koneella nimitpohjaisten virtuaalipalvelinten (Name-based Virtual Host) avulla. Ajatuksena oli saada samasta IP-osoitteesta ja portista 80 auki eri sivustot eli localhost, site1.com ja site2.com.
 Toinen tärkeä juttu tässä tehtävässä oli oppia pyörittämään nettisivujen tiedostoja suoraan omasta kotihakemistosta tavallisena käyttäjänä, jotta ei tarvitsisi joka välissä säätää pääkäyttäjän sudo-oikeuksilla. Lisäksi testailtiin palomuurin vaikutusta lokaaliliikenteeseen, seurattiin järjestelmän lokitiedostoja ja ratkottiin vastaan tulleita konfiguraatio- ja kirjoitusvirheitä.
+<img width="952" height="447" alt="kuva1_Apache" src="https://github.com/user-attachments/assets/b67cee87-57b4-4c17-9c08-81c3e83274a5" />
 
 # 2 Apachen asennus ja oletussivun muokkaus
 Aloitin tehtävän asentamalla Apache2-palvelimen järjestelmään pakettienhallinnan kautta. Kun asennus oli valmis, testasin palvelimen toimintaa avaamalla osoitteen localhost sekä graafisella verkkoselaimella että suoraan päätteestä curl-komennolla. Mulla aukesi ruudulle Apachen normaali Ubuntu-oletussivu, mikä varmisti sen, että palvelinpyörähti kerralla käyntiin.
 Seuraavaksi oli tarkoitus muokata tätä oletussivua ja korvata se omalla tekstillä. Tein tämän syöttämällä echo-komennon ja ohjaamalla sen suoraan pääkäyttäjän oikeuksilla toimivalle tee-komennolle osoitteeseen /var/www/html/index.html. Tämä oli myös tehtävänannon mukaan ainoa kohta, jossa nettisivun muokkaamiseen tarvittiin sudo-oikeuksia.
 
-Kuva 1: Apachen oletussivun testaaminen ja oman tekstin ajaminen index.html-tiedostoon.
+<img width="947" height="1020" alt="kuva2 Apache" src="https://github.com/user-attachments/assets/5babeb99-27df-473f-8a2a-573378dcf954" />
+
 
 ### Teoriakysymysten pohdintaa ja vastauksia:
 ####Mitä komennossa tapahtuu vaihe vaiheelta?
@@ -19,7 +21,8 @@ Jos yrittää ajaa komennon muodossa "sudo echo teksti > tiedosto", komento epä
 Sitä varten, että saisin site1.com ja site2.com osoitteet toimimaan omalla koneellani ilman oikeita rekisteröityjä verkkotunnuksia tai ulkoisia DNS-palvelimia, kävin muokkaamassa järjestelmän omaa /etc/hosts -tiedostoa. Lisäsin sinne rivit, jotka ohjaavat kyseiset verkkotunnukset suoraan oman koneen silmukkaosoitteeseen 127.0.0.1.
 Seuraavaksi asensin ja kytkin päälle UFW-palomuurin tutkiakseni, miten se vaikuttaa paikalliseen liikenteeseen. Suljin HTTP-liikenteen eli portin 80 palomuurista ja kokeilin ottaa yhteyttä localhostiin selaimella sekä curlilla.
 
-Kuva 2: UFW-palomuurin sääntöjen testaaminen ja yhteyden katkeaminen.
+<img width="957" height="1017" alt="kuva3 Apache" src="https://github.com/user-attachments/assets/99e7830a-038f-4117-877e-8f17b70c7674" />
+
 
 Tästä testistä huomasin sen, että jos UFW-palomuuriin tekee yleisen estosäännön portille 80 ilman tarkempia rajauksia, se blokkaa myös koneen sisäisen loopback-liikenteen. Eli vaikka yhteys ei tule verkosta vaan koneelta itseltään osoitteeseen 127.0.0.1, palomuuri ottaa siihen kiinni ja estää sivun latautumisen. Testin jälkeen avasin portin 80 uudelleen palomuurista, jotta pääsin jatkamaan harjoitusta.
 # 4 Ensimmäinen virtuaalipalvelin (site1.com) kotihakemistosta
@@ -28,7 +31,7 @@ Tässä kohtaa piti olla tarkkana kansioiden oikeuksien kanssa: Apachen taustapr
 Sen jälkeen siirryin tekemään Apachen virtuaalipalvelimen konfiguraatiota. Luoin uuden tiedoston site1.com.conf Apachen sites-available -hakemistoon. Määritin sinne ServerName-arvoksi site1.com ja DocumentRoot-poluksi oman kotihakemistoni kansion. Lisäksi piti lisätä Directory-osio, jossa annettiin Apachelle lupa lukea kyseistä kotihakemiston kansiota (Require all granted).
 Otin uuden sivuston käyttöön a2ensite-komennolla ja latasin Apachen asetukset uudelleen.
 
-Kuva 3: Ensimmäisen virtuaalipalvelimen määrittäminen ja testaaminen
+Kuva 3: 
 
 # 5 Lokitiedostot ja tahallinen virheen aiheuttaminen
 Päästäkseni näkemään miten Apache reagoi ongelmiin ja miltä se näyttää järjestelmässä, seurasin lokitiedostoja päätteessä tail- ja journalctl-komennoilla. Pidin auki sekä Apachen omaa error.log- ja access.log-tiedostoa että systemd:n journalctl-lokia.
