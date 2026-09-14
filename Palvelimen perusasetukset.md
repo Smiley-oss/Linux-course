@@ -11,3 +11,15 @@ Heti VM:lle kirjautumisen jälkeen suoritin järjestelmän päivityksen. Tämä 
 - yhteensopivuuden tulevien konfiguraatioiden kanssa
 
 Päivityksen jälkeen palvelin on turvallinen ja valmis vastaanottamaan uusia palveluita kuten SSH‑avaintunnistautumisen ja Apache‑webpalvelimen.
+## 2. SSH‑palvelin ja avaintunnistautuminen – turvallisen etäyhteyden varmistaminen
+SSH‑palvelimen tila
+Tarkistin SSH‑palvelimen tilan varmistaakseni, että etäyhteys toimii luotettavasti. Azure‑VM:ssä SSH on yleensä valmiiksi käynnissä, koska se on ensisijainen hallintakanava. Palvelimen tila kertoo:
+
+- onko palvelu aktiivinen
+
+- kuunteleeko se porttia 22
+
+- onko konfiguraatiossa virheitä
+
+Tämä vaihe varmistaa, että palvelin on hallittavissa myös jatkossa, vaikka salasana poistettaisiin käytöstä.
+<img width="957" height="776" alt="ssh-status" src="https://github.com/user-attachments/assets/9370e642-07fe-43b1-80c2-d64288d19928" />
