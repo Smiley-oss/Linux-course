@@ -167,10 +167,28 @@ Tämä työkalu soveltuu syvälliseen verkkoanalyysiin ja ongelmanratkaisuun.
 
 <img width="817" height="515" alt="tcpdump" src="https://github.com/user-attachments/assets/05875dc6-01bb-4722-b20f-e8a433c72730" />
 
+# Yhteenveto
+Module 4:n aikana rakensin Azure‑VM:lle toimivan ja turvallisen Linux‑palvelimen. Tehtävät kattoivat:
 
+- järjestelmän päivityksen
 
+- SSH‑avaintunnistautumisen
 
+- Apache‑webpalvelimen käyttöönoton
 
+- UFW‑palomuurin konfiguroinnin
+
+- verkon rakenteen ja liikenteen analyysin.
+
+Kokonaisuutena palvelin on nyt:
+
+- turvallinen
+
+- hallittavissa avaintunnistautumisella
+
+- valmis TLS‑sertifikaattien käyttöönottoon (Module 5)
+
+- varustettu toimivalla web‑palvelulla.
 
 
 
