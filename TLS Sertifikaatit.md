@@ -44,10 +44,12 @@ Harjoitus oli teknisesti opettavampi kuin aluksi kuvittelin. Apache ei anna palj
 
 <img width="816" height="505" alt="palomuuri" src="https://github.com/user-attachments/assets/f86290d0-3e2c-4a9a-8774-c07599f93a9e" />
 
-### WWW-aliasin
+WWW-aliasin
 Aliasin ongelma oli hyvä esimerkki siitä, miten Apache käsittelee hakemisto-oikeuksia. 403 Forbidden ei tarkoita, että sivuaa ei ole olemassa, vaan että Apache ei anna lupaa käyttää hakemistoa. Kun lisäsin oikean Directory-lohkon ja ServerAlias-rivin, alias alkoi toimia. Tämä vahvisti, että VirtualHoastien rakenteen ymmärtäminen on tärkeää.
 
-<img width="817" height="532" alt="virtualHost" src="https://github.com/user-attachments/assets/ff8c72f3-5723-4fd9-84f6-07089baa075a" />
+HTTP -> HTTPS -ohjaus oli selkeä mutta tärkeä osa harjoitusta. Opin että redicert tehdään aina porti
+Op
+
 
 
 
