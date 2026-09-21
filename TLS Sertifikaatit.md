@@ -29,7 +29,15 @@ Tämä näkyi myös curl-testissä : curl -v https://tls-test000.linuxkurssi.xyz
 
 <img width="855" height="262" alt="portti 443 ei toimi" src="https://github.com/user-attachments/assets/70aa2370-e51e-47ca-a4cd-160a301164ae" />
 
-Avasin palomuurin: sudo ufw 443/tcp
+RewriteEngine käynnistää mod_rewrite moduulin.
+RewriteCond tarkistaa, että pyyntö tulee oikeasta domainista.
+RewriteRule ohjaa kaiken liikenteen HTTPS-versioon, säilyttäen alkuperäisen polun.
+
+Kun käynnistin Apachen uudelleen ja testasin ohjauksen curlilla, sain selkeän 301 Moved Permanently -vastauksen ja Location-headerin, joka ohjasi selaimen automaattisesti HTTPS-versioon. Tämä vahavisti, että ohjaus toimii oikein ja että käyttäjä ei voi vahingossa käyttää salaamatonta yhteyttä.
+
+Tämä vaihe konkretisoi hyvin sen mitä tärkeä on pakottaa käyttäjä turvalliseen yhteyteen. Opin myös, että redirect tehdään aina portti 80 VirtualHoastissa, koska HTTP-liikenne tulee sinne. Curl-testi näytti selvästi, miten 301-ohjaus toimii ja miten selaimet sueraavat Location-headeria.
+
+## Avasin palomuurin: sudo ufw 443/tcp
 Tämän jälkeen HTTPS alkoi toimia heti.
 Tämä osoitti, että vaikka konfiguraatio olisi kunnossa, palomuuri voi silti estää kaiken.
 
