@@ -37,19 +37,15 @@ Kun käynnistin Apachen uudelleen ja testasin ohjauksen curlilla, sain selkeän 
 
 Tämä vaihe konkretisoi hyvin sen mitä tärkeä on pakottaa käyttäjä turvalliseen yhteyteen. Opin myös, että redirect tehdään aina portti 80 VirtualHoastissa, koska HTTP-liikenne tulee sinne. Curl-testi näytti selvästi, miten 301-ohjaus toimii ja miten selaimet sueraavat Location-headeria.
 
-## Avasin palomuurin: sudo ufw 443/tcp
-Tämän jälkeen HTTPS alkoi toimia heti.
-Tämä osoitti, että vaikka konfiguraatio olisi kunnossa, palomuuri voi silti estää kaiken.
+# Pohdinta
+Harjoitus oli teknisesti opettavampi kuin aluksi kuvittelin. Apache ei anna paljon anteeksi, pienikin kirjoitusvirhe, kuten väärä polku tai yksi kirjain konfiguraatiossa, kaataa koko palvelimen. Tämä pakotti minut lukemaan virheimoituksia tarkasti ja ymmärtämään, mitä ne oikeasti tarkoittavat. Opin, että apachectl configtest on yksi tärkeimmistä komennoista, koska se paljastaa virheet enne kuin palvelin kaatuu.
+
+### Yksi yllättävimmistä asioista oli palomuurin vaikutus. Vaikka konfiguraatio oli kunnossa ja sertifikaatti asennettu, HTTPS ei toiminut ennen kuin avasin portin 443 UFW:ssä. Tämä opetti, että palvelimen toimivuus ei riipu vain Apachesta, vaan myös käyttöjärjestelmän tasolla olevista asetuksista.
 
 <img width="816" height="505" alt="palomuuri" src="https://github.com/user-attachments/assets/f86290d0-3e2c-4a9a-8774-c07599f93a9e" />
 
-## WWW-aliasin korjaaminen
-Kun päädomain  toimi, testasin
-https://www.tls-test000.linuxkurssi.xyz
-sivu antoi 403 Forbidden.
-Tämä tarkoittaa, että Apache löysi VirtualHostin, mutta ei antanut lupaa käyttää hakemistoa.
-Lisäsin VirtualHoastiin ServerAlias www.tls-testoo.linukurssi.xyz
-sekä oikean hakemisto-osion.
+### WWW-aliasin
+Aliasin ongelma oli hyvä esimerkki siitä, miten Apache käsittelee hakemisto-oikeuksia. 403 Forbidden ei tarkoita, että sivuaa ei ole olemassa, vaan että Apache ei anna lupaa käyttää hakemistoa. Kun lisäsin oikean Directory-lohkon ja ServerAlias-rivin, alias alkoi toimia. Tämä vahvisti, että VirtualHoastien rakenteen ymmärtäminen on tärkeää.
 
 <img width="817" height="532" alt="virtualHost" src="https://github.com/user-attachments/assets/ff8c72f3-5723-4fd9-84f6-07089baa075a" />
 
