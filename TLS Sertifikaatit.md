@@ -40,9 +40,11 @@ Tämä vaihe konkretisoi hyvin sen mitä tärkeä on pakottaa käyttäjä turval
 # Pohdinta
 Harjoitus oli teknisesti opettavampi kuin aluksi kuvittelin. Apache ei anna paljon anteeksi, pienikin kirjoitusvirhe, kuten väärä polku tai yksi kirjain konfiguraatiossa, kaataa koko palvelimen. Tämä pakotti minut lukemaan virheimoituksia tarkasti ja ymmärtämään, mitä ne oikeasti tarkoittavat. Opin, että apachectl configtest on yksi tärkeimmistä komennoista, koska se paljastaa virheet enne kuin palvelin kaatuu.
 
-### Yksi yllättävimmistä asioista oli palomuurin vaikutus. Vaikka konfiguraatio oli kunnossa ja sertifikaatti asennettu, HTTPS ei toiminut ennen kuin avasin portin 443 UFW:ssä. Tämä opetti, että palvelimen toimivuus ei riipu vain Apachesta, vaan myös käyttöjärjestelmän tasolla olevista asetuksista.
+Yksi yllättävimmistä asioista oli palomuurin vaikutus. Vaikka konfiguraatio oli kunnossa ja sertifikaatti asennettu, HTTPS ei toiminut ennen kuin avasin portin 443 UFW:ssä. Tämä opetti, että palvelimen toimivuus ei riipu vain Apachesta, vaan myös käyttöjärjestelmän tasolla olevista asetuksista.
+
 
 <img width="816" height="505" alt="palomuuri" src="https://github.com/user-attachments/assets/f86290d0-3e2c-4a9a-8774-c07599f93a9e" />
+
 
 WWW-aliasin
 Aliasin ongelma oli hyvä esimerkki siitä, miten Apache käsittelee hakemisto-oikeuksia. 403 Forbidden ei tarkoita, että sivuaa ei ole olemassa, vaan että Apache ei anna lupaa käyttää hakemistoa. Kun lisäsin oikean Directory-lohkon ja ServerAlias-rivin, alias alkoi toimia. Tämä vahvisti, että VirtualHoastien rakenteen ymmärtäminen on tärkeää.
@@ -65,14 +67,11 @@ Lopputuloksena syntyi turvallinen, toimiva verkkopalvelu. Harjoitus paransi ymm�
 # Lähteet
 Lets Encrypt - How it Works
 https://letsencrypt.org/how-it-works
-Cloudflare - What is TLS
-https://www.cloudflare.com/learning/ssl/trasport-layesr-security-tls
 
 
+<img width="827" height="520" alt="Näyttökuva 2026-09-21 190527" src="https://github.com/user-attachments/assets/3b58d63a-ac51-4063-94e7-2dabe51bbca1" />
 
-
-
-
+<img width="930" height="325" alt="Näyttökuva 2026-09-21 190636" src="https://github.com/user-attachments/assets/d3c62a86-bc28-4131-a2f3-e6982243e68c" />
 
 
 
