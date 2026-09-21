@@ -13,7 +13,6 @@ Toinen virhe oli kirjoitusvirhe CustoLog -> CustomLog.
 Apache ei hyväksy tuntemattomia direktiivejä, joten tämäkin kaatoi palvelimen.
 Kun nämä korjattiin. Apache käynnistyi normaalisti.
 
-<img width="862" height="588" alt="Näyttökuva 2026-09-21 103815" src="https://github.com/user-attachments/assets/e641362c-1c96-488e-a691-45ff2d09fe1e" />
 
 <img width="875" height="187" alt="Näyttökuva 2026-09-21 104648" src="https://github.com/user-attachments/assets/b54b5516-f264-4b94-859e-421c513849a0" />
 
