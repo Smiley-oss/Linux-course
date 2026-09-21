@@ -7,7 +7,6 @@ selittää, mitä TLS tekee ja miksi se on tärkeä osa modernia verkkoturvallis
 Harjoituksen tarkoitus ei ollut vain saada sivu toimimaan, vaan ymmärtää koko prosessi, konfiguraatio rakentaminen, virheiden etsiminen, palomuurin hallinta, VirtualHoastein logiikka ja lopulta turvallisen yhteyden varmistaminen.
 
 ## Apache-konfiguraation korjaaminen
-sudo apachectl configtest
 Heti tuli virheitä vastaan. DocumentRoot oli kirjoitettu väärin, polku osoitti käyttäjälle linuxkurssi, vaikka oikea käyttäjä oli linuxuser. Apache ei käynnisty, jos DocumentRoot ei ole olemassa, joten korjasinpolun.
 Toinen virhe oli kirjoitusvirhe CustoLog -> CustomLog.
 Apache ei hyväksy tuntemattomia direktiivejä, joten tämäkin kaatoi palvelimen.
