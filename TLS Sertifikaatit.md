@@ -47,8 +47,27 @@ Harjoitus oli teknisesti opettavampi kuin aluksi kuvittelin. Apache ei anna palj
 WWW-aliasin
 Aliasin ongelma oli hyvä esimerkki siitä, miten Apache käsittelee hakemisto-oikeuksia. 403 Forbidden ei tarkoita, että sivuaa ei ole olemassa, vaan että Apache ei anna lupaa käyttää hakemistoa. Kun lisäsin oikean Directory-lohkon ja ServerAlias-rivin, alias alkoi toimia. Tämä vahvisti, että VirtualHoastien rakenteen ymmärtäminen on tärkeää.
 
-HTTP -> HTTPS -ohjaus oli selkeä mutta tärkeä osa harjoitusta. Opin että redicert tehdään aina porti
-Op
+HTTP -> HTTPS -ohjaus oli selkeä mutta tärkeä osa harjoitusta. Opin että redicert tehdään aina portti 80 VirtualHoast, ei SSL-VirtualHoastissa. Curl-testi näytti selvästi, miten 301-ohjaus toimii ja miten selaimet seuraavat Location-hdearia.
+
+Kokonaisuutena tämä harjoitus kehitti omaa osaamistani palvelinympäristöjen hallinnassa. Opin lukemaan virheilmoituksia, ymmärtämään kokonaisuuksia ja korjaamaan ongelmia järjestelmällisesti. Tämä oli hyvä käytännön harjoitus oikeasta palvelinadminin työstä.
+
+## Yhteenveto
+Sain rakennettua toimivan HTTPS-palvelun, jossa:
+- Apache toimii ilman virheitä
+- Lets Encryptin sertifikaatti on asennettu
+- HTTPS toimii ja curl-testit vahvistavat TLS-käsittelyn
+- www.allias toimii oikein
+- HTTP->HTTPS-Ohjaus toimii 301-statuskoodilla
+- Palomuuri sallii oikeat portit
+
+Lopputuloksena syntyi turvallinen, toimiva verkkopalvelu. Harjoitus paransi ymmärrystäni palvelinympäristöistä, tietoturvasta ja Apache-konfiguraatiosta ja antoi hyvän pohjan tuleville Linux-harjoituksille.
+
+# Lähteet
+Lets Encrypt - How it Works
+https://letsencrypt.org/how-it-works
+Cloudflare - What is TLS
+https://www.cloudflare.com/learning/ssl/trasport-layesr-security-tls
+
 
 
 
