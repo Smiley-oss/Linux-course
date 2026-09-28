@@ -1,16 +1,16 @@
 # 1. Johdanto
 Rakensin Debian‑pohjaisen VirtualBox‑kehitystyöaseman kurssin Module 6 ‑tehtävää varten. Tavoitteena oli luoda ympäristö, jossa voin tehdä DevOps‑harjoituksia, konttiteknologioita, versionhallintaa ja Infrastructure‑as‑Code‑työskentelyä. Asensin ja konfiguroin kaikki työkalut itse, ja korjasin virheet matkan varrella. Tämä raportti kuvaa työaseman, virheet, korjaukset ja opit.
 
-(Lisää tähän kuvakaappaus VirtualBox‑VM:stä)
+
 
 # 2. Git & GitHub – Versionhallinta ammattilaisen tavalla
 ## 2.1 GitHub‑asetukset
 Asetin GitHubissa sähköpostin yksityiseksi ja otin käyttöön noreply‑osoitteen. Tämä estää oikean sähköpostin näkymisen commit‑historiassa.
 
-❌ Virhe: GitHub näytti oikean sähköpostini
+Virhe: GitHub näytti oikean sähköpostini
 Aluksi commit‑historia paljasti oikean sähköpostini.
 
-✔ Korjaus
+- Korjaus
 Vaihdoin GitHubissa asetuksen “Keep my email address private”.
 
 Päivitin Git‑asetukset:
@@ -22,22 +22,23 @@ GitHubin yksityisyysasetukset vaikuttavat suoraan Git‑identiteettiin.
 Noreply‑osoite on pakollinen, jos haluaa suojata oman sähköpostin.
 
 
-## 2.2 SSH‑avaimet ja Git‑konfiguraatio
+2.2 SSH‑avaimet ja Git‑konfiguraatio
 Loin GitHubia varten erillisen SSH‑avaimen:
 
-Koodi
+
 ssh-keygen -t ed25519 -f ~/.ssh/github_key
 Konfiguroin SSH‑yhteyden:
 
-Koodi
+
 Host github.com
     HostName github.com
     User git
     IdentityFile ~/.ssh/github_key
+    
 Virhe: Käytin väärää SSH‑avainta
 Oletusavain ei toiminut GitHubiin → permission denied.
 
-Korjaus:
+- Korjaus
 Loin uuden avaimen ja lisäsin sen GitHubiin.
 
 Oppi:
@@ -47,55 +48,55 @@ SSH‑config tekee työskentelystä nopeampaa ja luotettavampaa.
 <img width="805" height="462" alt="configurin git hub" src="https://github.com/user-attachments/assets/d65ade79-3059-4660-a67c-3010b328f619" />
 
 
-## 2.3 Testirepo
+2.3 Testirepo
 Kloonasin kurssin testirepon SSH:llä:
 
-Koodi
+
 git clone git@github.com:linuxkurssi/git-testing.git
 Lisäsin oman Linux‑vinkin, commitoin ja puskin sen GitHubiin.
-ismail_tip.txt
+
+https://github.com/linuxkurssi/git-testing/blob/main/ismail_tip.txt
 
 3. Docker & Docker Compose – Konttialusta kehitystyöhön
 3.1 Dockerin asennus ja testaus
 Asensin Dockerin virallisilla ohjeilla ja testasin:
 
-Koodi
+
 sudo docker run hello-world
 Ajoin useita imageja: nginx, python, mysql, ubuntu, vscode‑test.
 
-(Lisää tähän kuvakaappaus docker ps ‑listasta)
+<img width="950" height="663" alt="Näyttökuva 2026-09-22 235937" src="https://github.com/user-attachments/assets/97ce3ef6-44f1-45e1-9632-fbfb3f31211c" />
+
 
 3.2 Virheet ja korjaukset
-❌ Virhe: Docker ei pystynyt poistamaan hello-world imagea
-Virhe:
+Virhe: Docker ei pystynyt poistamaan hello-world imagea
 
-Koodi
 unable to delete hello-world:latest (must be forced)
-✔ Korjaus
+- Korjaus
 Poistin kontit:
 
-Koodi
+
 docker rm -f $(docker ps -aq)
 docker rmi -f hello-world
-⭐ Oppi
+
+Oppi:
 Docker ei voi poistaa imagea, jos kontti käyttää sitä.
 Konttien siivous on tärkeä osa DevOps‑työskentelyä.
 
-❌ Virhe: Portti 8080 oli varattu
+Virhe: Portti 8080 oli varattu
 Terraform antoi virheen:
-
-Koodi
 Bind for 0.0.0.0:8080 failed: port is already allocated
-✔ Korjaus
+- Korjaus
 Poistin kaikki kontit.
 
 Vaihdoin Terraformissa portin 8080 → 9090.
 
-⭐ Oppi
+Oppi:
 Porttikonfliktit ovat yleisiä Dockerissa.
 Opin hallitsemaan portteja ja tarkistamaan konttien tilan ennen Terraform‑apply‑komentoa.
 
-(Lisää tähän kuvakaappaus porttivirheestä)
+<img width="843" height="476" alt="Näyttökuva 2026-09-23 113454" src="https://github.com/user-attachments/assets/a741af1e-2086-4d72-ae33-eea5ce0724a6" />
+
 
 3.3 Docker Compose
 Rakensin monikonttiympäristön:
@@ -118,111 +119,111 @@ Docker‑verkko
 
 Docker‑volyymi
 
-(Lisää tähän kuvakaappaus Terraform‑apply‑komennosta)
+<img width="811" height="406" alt="terraform -apply" src="https://github.com/user-attachments/assets/35ac2aa7-ae3a-4482-9715-1b4625223e2e" />
+
 
 4.2 Virheet ja korjaukset
-❌ Virhe: Terraform ei löytänyt konfiguraatiotiedostoja
-Virhe:
-
-Koodi
-No configuration files
-✔ Korjaus
+Virhe: Terraform ei löytänyt konfiguraatiotiedostoja.
+- Korjaus
 Olin väärässä hakemistossa → siirryin oikeaan:
 
-Koodi
+
 cd ~/terraform-docker
-⭐ Oppi
+- Oppi
 Terraform toimii vain hakemistossa, jossa main.tf sijaitsee.
 
-❌ Virhe: Docker‑providerin resurssit olivat ristiriidassa
+Virhe: Docker‑providerin resurssit olivat ristiriidassa
 Terraform yritti tuhota imagea, jota kontti käytti.
 
-✔ Korjaus
+- Korjaus
 Poistin kontit ennen Terraform‑apply‑komentoa.
 
-⭐ Oppi
+Oppi:
 Terraformin state pitää resurssit synkronissa.
 Opin hallitsemaan Docker‑resursseja Terraformin kautta.
 
 5. Kehitystyökalut – Ammattilaisen työkalupakki
 Asensin työasemaan seuraavat työkalut:
 
-htop – prosessien seuranta
+- htop – prosessien seuranta
 
-tmux – terminaalipaneelit ja sessiot
+- tmux – terminaalipaneelit ja sessiot
 
-neovim – moderni editori
+- neovim – moderni editori
 
-kubectl – Kubernetes‑hallinta
+- kubectl – Kubernetes‑hallinta
 
-Go – DevOps‑ohjelmointikieli
+- Go – DevOps‑ohjelmointikieli
 
-Ansible – automaatio ja konfiguraatiohallinta
+- Ansible – automaatio ja konfiguraatiohallinta
 
-terraform-docs – Terraform‑moduulien dokumentointi
+- terraform-docs – Terraform‑moduulien dokumentointi
 
-(Lisää tähän kuvakaappaus tmux‑paneeleista tai neovimista)
+<img width="955" height="942" alt="terraform vs code" src="https://github.com/user-attachments/assets/56ddc117-d43a-4c07-a412-14fea4403169" />
+
 
 6. Optimoinnit ja konfiguraatiot
 SSH‑avainten hallinta
 
-Dockerin ja Compose‑pluginin asennus
+- Dockerin ja Compose‑pluginin asennus
 
-Terraformin provider‑konfiguraatiot
+- Terraformin provider‑konfiguraatiot
 
-Porttien hallinta (8080 → 9090)
+ - Porttien hallinta (8080 → 9090)
 
-Konttien siivous automatisoidusti
+- Konttien siivous automatisoidusti
 
-VS Code ‑laajennusten optimointi
+- VS Code ‑laajennusten optimointi
 
-VirtualBoxin verkkoasetusten säätö
+- VirtualBoxin verkkoasetusten säätö
 
 7. Mitä opin kokonaisuudesta
-⭐ Opin hallitsemaan:
-GitHub SSH‑avaimet
+Opin hallitsemaan:
+- GitHub SSH‑avaimet
 
-Docker‑konttien elinkaari
+- Docker‑konttien elinkaari
 
-Compose‑stackit
+- Compose‑stackit
 
-Terraformin state‑hallinta
+- Terraformin state‑hallinta
 
-DevOps‑työkalujen asennus
+- DevOps‑työkalujen asennus
 
-Virheiden analysointi ja korjaaminen
+- Virheiden analysointi ja korjaaminen
 
-⭐ Opin myös:
-Että virheet ovat osa oppimista
+Opin myös:
+- Että virheet ovat osa oppimista
 
-Että porttien hallinta on kriittistä
+- Että porttien hallinta on kriittistä
 
-Että IaC vaatii tarkkuutta hakemistorakenteissa
+- Että IaC vaatii tarkkuutta hakemistorakenteissa
 
-Että tmux ja neovim nopeuttavat työskentelyä merkittävästi
+- Että tmux ja neovim nopeuttavat työskentelyä merkittävästi
 
 8. Yhteenveto
 Rakensin modernin Linux‑kehitystyöaseman, joka sisältää:
 
-Git + GitHub SSH
+- Git + GitHub SSH
 
-Docker + Compose
+- Docker + Compose
 
-Terraform + terraform-docs
+- Terraform + terraform-docs
 
-VS Code + Neovim
+- VS Code + Neovim
 
-Python
+- Python
 
-htop
+- htop
 
-tmux
+- tmux
 
-kubectl
+- kubectl
 
-Go
+- Go
 
-Ansible
+- Ansible
 
 Työasema tukee ohjelmistokehitystä, konttiteknologioita, IaC‑työskentelyä ja pilvipalveluja.
 Se on valmis jatkamaan kurssin seuraavia osioita (Azure, moduulit, arkkitehtuuri, state).
+
+<img width="801" height="426" alt="tarvittavat työkalut dockerille" src="https://github.com/user-attachments/assets/b380b6c7-002e-4090-950e-7fd1684cec7e" />
