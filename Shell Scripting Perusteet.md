@@ -71,30 +71,31 @@ tämä parantaa tehokkuutta erityisesti pitkissä konfiguraatioissa
 Tässä on oma, tehtävän mukainen .bashrc, joka sopii minun työskentelyyn:
 
 bash
-# Welcome banner
-echo "Hello, Linuxuser"
+Welcome banner
+echo "WHUZAAP HOMIEE"
 
-# Aliases
+Aliases
 alias ll='ls -l'
 alias la='ls -la'
 alias gs='git status'
 alias ..='cd ..'
 
-# History settings
+History settings
 HISTSIZE=5000
 HISTFILESIZE=10000
 HISTCONTROL=ignoredups
 
-# Prompt
+Prompt
 PS1="\u@\h:\w$ "
 
-# Color support
+Color support
 alias ls='ls --color=auto'
 
-# Add $HOME/bin to PATH if it exists
+Add $HOME/bin to PATH if it exists
 if [ -d "$HOME/bin" ]; then
     PATH="$PATH:$HOME/bin"
 fi
+
 Perustelut:
 Banneri → testaa että .bashrc toimii
 
@@ -107,6 +108,7 @@ Promptti → selkeä ja yksinkertainen
 Värillinen ls → helpottaa tiedostojen erottamista
 
 PATH‑lisäys → mahdollistaa omien skriptien ajamisen helposti
+
 
 <img width="911" height="402" alt="kuinka monta komentoja bash muista" src="https://github.com/user-attachments/assets/f9983af1-2bfd-4eb2-ba19-63847d1aad13" />
 
